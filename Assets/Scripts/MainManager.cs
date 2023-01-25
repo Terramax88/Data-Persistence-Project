@@ -18,6 +18,9 @@ public class MainManager : MonoBehaviour
     
     private bool m_GameOver = false;
 
+    //Best Score Text
+    public Text BestScoreText;
+
     
     // Start is called before the first frame update
     void Start()
@@ -36,6 +39,9 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+
+        //BestScore
+        BestScoreText.text = DataManager.Instate.textBestScore;
     }
 
     private void Update()
@@ -66,6 +72,8 @@ public class MainManager : MonoBehaviour
     {
         m_Points += point;
         ScoreText.text = $"Score : {m_Points}";
+        DataManager.Instate.ScoreToBest(m_Points);
+        BestScoreText.text = DataManager.Instate.textBestScore;
     }
 
     public void GameOver()
